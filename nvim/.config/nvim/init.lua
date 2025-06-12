@@ -734,6 +734,7 @@ require("lazy").setup({
 				typescript = { "prettierd", "prettier", stop_after_first = true },
 				typescriptreact = { "prettierd", "prettier", stop_after_first = true },
 				java = { "google-java-format" },
+				json = { "prettierd", "prettier", stop_after_first = true },
 			},
 		},
 	},
