@@ -96,7 +96,12 @@ vim.keymap.set("i", "kk", "<Esc>", { silent = true })
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
 -- Open file explorer
-vim.keymap.set("n", "<leader>e", "<Cmd>Ex<CR>", { desc = "Open file [E]xplorer" })
+vim.keymap.set(
+	"n",
+	"<leader>e",
+	"<Cmd>:Neotree source=filesystem position=right reveal reveal_force_cwd<CR>",
+	{ desc = "Open file [E]xplorer" }
+)
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
@@ -125,6 +130,9 @@ vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper win
 -- vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
 -- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
+
+-- Map ; to command mode
+vim.keymap.set("n", ";", ":")
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -350,6 +358,9 @@ require("lazy").setup({
 					find_files = {
 						hidden = true,
 					},
+					live_grep = {
+						file_ignore_patterns = { "node_modules", ".git" },
+					},
 				},
 				defaults = {
 					vimgrep_arguments = {
@@ -363,7 +374,6 @@ require("lazy").setup({
 						"--ignore",
 					},
 				},
-				-- pickers = {}
 				extensions = {
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown(),
@@ -646,6 +656,10 @@ require("lazy").setup({
 				-- ts_ls = {},
 				--
 
+				eslint_d = {},
+				prettierd = {},
+				ts_ls = {},
+
 				lua_ls = {
 					-- cmd = { ... },
 					-- filetypes = { ... },
@@ -661,6 +675,13 @@ require("lazy").setup({
 					},
 				},
 			}
+
+			for server_name, server_config in pairs(servers) do
+				server_config.capabilities =
+					vim.tbl_deep_extend("force", {}, capabilities, server_config.capabilities or {})
+				vim.lsp.config(server_name, server_config)
+				vim.lsp.enable(server_name)
+			end
 
 			-- Ensure the servers and tools above are installed
 			--
@@ -680,21 +701,6 @@ require("lazy").setup({
 				"stylua", -- Used to format Lua code
 			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
-
-			require("mason-lspconfig").setup({
-				ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
-				automatic_installation = false,
-				handlers = {
-					function(server_name)
-						local server = servers[server_name] or {}
-						-- This handles overriding only values explicitly passed
-						-- by the server configuration above. Useful when disabling
-						-- certain features of an LSP (for example, turning off formatting for ts_ls)
-						server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-						require("lspconfig")[server_name].setup(server)
-					end,
-				},
-			})
 		end,
 	},
 
