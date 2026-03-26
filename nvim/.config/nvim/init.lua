@@ -1,3 +1,5 @@
+vim.g.vscode = true
+
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -96,12 +98,11 @@ vim.keymap.set("i", "kk", "<Esc>", { silent = true })
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
 -- Open file explorer
-vim.keymap.set(
-	"n",
-	"<leader>e",
-	"<Cmd>:Neotree source=filesystem position=right reveal reveal_force_cwd<CR>",
-	{ desc = "Open file [E]xplorer" }
-)
+vim.keymap.set("n", "<leader>e", "<Cmd>:Neotree toggle<CR>", { desc = "Open file [E]xplorer" })
+
+-- Disable concealing to avoid not seeing quotes in JSON
+vim.o.conceallevel = 0
+
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
@@ -643,22 +644,21 @@ require("lazy").setup({
 			--  - settings (table): Override the default settings passed when initializing the server.
 			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 			local servers = {
-				-- clangd = {},
-				-- gopls = {},
-				-- pyright = {},
-				-- rust_analyzer = {},
+				clangd = {},
+				gopls = {},
 				-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
 				--
 				-- Some languages (like typescript) have entire language plugins that can be useful:
 				--    https://github.com/pmizio/typescript-tools.nvim
 				--
 				-- But for many setups, the LSP (`ts_ls`) will work just fine
-				-- ts_ls = {},
-				--
+				ruff = {},
 
 				eslint_d = {},
 				prettierd = {},
 				ts_ls = {},
+
+				rust_analyzer = {},
 
 				lua_ls = {
 					-- cmd = { ... },

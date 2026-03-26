@@ -15,7 +15,23 @@ return {
 		---@module "neo-tree"
 		---@type neotree.Config?
 		opts = {
-			-- add options here
+			window = {
+				position = "right",
+				source = "filesystem",
+			},
+			filesystem = {
+				follow_current_file = { enabled = true },
+				group_empty_dirs = true,
+				hijack_netrw_behavior = "open_default",
+			},
+			event_handlers = {
+				{
+					event = "file_opened",
+					handler = function(file_path)
+						require("neo-tree.command").execute({ action = "close" })
+					end,
+				},
+			},
 		},
 	},
 }
