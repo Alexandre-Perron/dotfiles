@@ -685,6 +685,7 @@ require("lazy").setup({
 				eslint_d = {},
 				prettierd = {},
 				ts_ls = {},
+				zls = {},
 
 				rust_analyzer = {},
 
