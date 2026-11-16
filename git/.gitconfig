@@ -1,0 +1,14 @@
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
+[url "ssh://git@github.com:aperron-coveo/"]
+	insteadOf = https://github.com/
+[commit]
+	gpgsign = true
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+# name, email and signingkey live here (not committed)
+[include]
+	path = ~/.gitconfig.local

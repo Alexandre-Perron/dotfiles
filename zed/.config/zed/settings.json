@@ -1,0 +1,140 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "terminal": {
+    "font_family": "CaskaydiaCove Nerd Font"
+  },
+  "edit_predictions": {
+    "mode": "subtle"
+  },
+  "outline_panel": {
+    "dock": "left"
+  },
+  "collaboration_panel": {
+    "dock": "left"
+  },
+  "agent": {
+    "tool_permissions": {
+      "tools": {
+        "terminal": {
+          "always_allow": [
+            {
+              "pattern": "^grep\\b"
+            },
+            {
+              "pattern": "^find\\s+node_modules/\\.pnpm/@coveord\\+plasma-mantine@59\\.8\\.0_640cbddb3005304350159bc8d133b3b0/node_modules/@coveord/plasma-mantine(\\s|$)"
+            },
+            {
+              "pattern": "^find\\s+node_modules/\\.pnpm(\\s|$)"
+            },
+            {
+              "pattern": "^head\\b"
+            }
+          ]
+        }
+      }
+    },
+    "default_profile": "write",
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "claude-sonnet-5",
+      "enable_thinking": true,
+      "effort": "medium"
+    },
+    "dock": "left",
+    "favorite_models": [
+      {
+        "provider": "copilot_chat",
+        "model": "claude-sonnet-5",
+        "enable_thinking": true,
+        "effort": "medium"
+      }
+    ],
+    "model_parameters": []
+  },
+  "disable_ai": true,
+  "languages": {
+    "Python": {
+      "language_servers": ["pylsp", "ruff", "!basedpyright"],
+      "format_on_save": "on",
+      "formatter": {
+        "language_server": {
+          "name": "ruff"
+        }
+      }
+    }
+  },
+  "lsp": {
+    "vtsls": {
+      "settings": {
+        "typescript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always"
+          }
+        },
+        "javascript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always"
+          }
+        }
+      },
+      "enable_lsp_tasks": true
+    },
+    "ruff": {
+      "initialization_options": {
+        "settings": {
+          "configurationPreference": "filesystemFirst"
+        }
+      }
+    },
+    "pylsp": {
+      "settings": {
+        "plugins": {
+          "mypy": {
+            "enabled": true,
+            "live_mode": true,
+          },
+          "pycodestyle": { "enabled": false },
+          "pyflakes": { "enabled": false },
+          "mccabe": { "enabled": false }
+        }
+      }
+    }
+  },
+  "preferred_line_length": 140,
+  "icon_theme": "Catppuccin Mocha",
+  "git_panel": {
+    "dock": "right"
+  },
+  "project_panel": {
+    "hide_gitignore": false,
+    "dock": "right"
+  },
+  "toolbar": {
+    "quick_actions": true,
+    "breadcrumbs": true
+  },
+  "minimap": {
+    "show": "never"
+  },
+  "autosave": {
+    "after_delay": {
+      "milliseconds": 1000
+    }
+  },
+  "ui_font_family": "CaskaydiaCove Nerd Font",
+  "buffer_font_family": "CaskaydiaCove Nerd Font",
+  "ui_font_size": 15.0,
+  "buffer_font_size": 16.0,
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "Catppuccin Mocha"
+  }
+}
